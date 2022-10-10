@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QWidget
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
 
 import sys
 
@@ -6,20 +6,18 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-def showWindow():
-    logging.info("初始化 window")
-    window: QWidget = QWidget()
-    logging.info("显示 window")
-    window.show()
+class MainWindow(QMainWindow):
+    def __init__(self) -> None:
+        super().__init__()
+        self.setWindowTitle("My App")
+        button = QPushButton("Press me!")
+        self.setCentralWidget(button)
 
 def startApp():
     logging.info("初始化 Application")
     app: QApplication = QApplication(sys.argv)
-    logging.info("初始化 window")
-    window: QWidget = QWidget()
-    logging.info("显示 window")
+    window = MainWindow()
     window.show()
-    logging.info("启动 App")
     app.exec()
 
 if __name__ == "__main__":
