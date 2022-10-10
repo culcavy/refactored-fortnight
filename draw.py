@@ -11,7 +11,11 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("My App")
         button = QPushButton("Press me!")
+        button.clicked.connect(self.buttonClicked)
         self.setCentralWidget(button)
+
+    def buttonClicked(self):
+        logging.info("button clicked")
 
 def startApp():
     logging.info("初始化 Application")
