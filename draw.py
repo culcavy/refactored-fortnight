@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout
 
 import sys
 
@@ -10,12 +10,15 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("My App")
-        button = QPushButton("Press me!")
-        button.clicked.connect(self.buttonClicked)
-        self.setCentralWidget(button)
-
-    def buttonClicked(self):
-        logging.info("button clicked")
+        self.label = QLabel()
+        self.input = QLineEdit()
+        self.input.textChanged.connect(self.label.setText)
+        layout = QVBoxLayout()
+        layout.addWidget(self.input)
+        layout.addWidget(self.label)
+        container = QWidget()
+        container.setLayout(layout)
+        self.setCentralWidget(container)
 
 def startApp():
     logging.info("初始化 Application")
